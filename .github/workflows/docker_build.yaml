@@ -3,7 +3,7 @@ name: build-container
 on:
   pull_request:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
   # Allow workflow to be manually run from the GitHub UI
   workflow_dispatch:
@@ -20,11 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Debug
-        run: |
-          echo "is_master: -> ${{ github.ref == 'refs/heads/master' }} <-"
-          echo "ref: ${{ github.head_ref }}"
-
       - name: Set up QEMU (required for arm build)
         uses: docker/setup-qemu-action@v2
 
@@ -38,7 +33,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build & push master
+      - name: Build & push
         uses: docker/build-push-action@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:

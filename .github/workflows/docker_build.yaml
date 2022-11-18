@@ -41,7 +41,7 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           pull: true
-          tags: latest
+          tags: phpdockerio/health-check-mock,phpdockerio/health-check-mock:latest
 
       - name: Build PR
         uses: docker/build-push-action@v3
